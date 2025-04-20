@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>n8n Workflow Builder Ai (Beta)</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>n8n Workflow Builder Ai (Beta)</h1>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="generate">Generate</button>
+            <button class="tab-button" data-tab="settings">Settings</button>
+        </div>
+
+        <!-- Generate Tab -->
+        <div id="generate" class="tab-content active">
+            <div class="form-group">
+                <label for="aiProvider">AI Provider:</label>
+                <select id="aiProvider">
+                    <option value="openai">OpenAI (GPT)</option>
+                    <option value="gemini">Google Gemini</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Describe the node or workflow:</label>
+                <textarea id="prompt" rows="5" placeholder="e.g., 'Create a workflow that triggers on a webhook, reads data from Google Sheets, and sends an email.' or 'A node that fetches weather data for a city.'"></textarea>
+            </div>
+
+            <button id="generateBtn">Generate n8n JSON</button>
+
+            <div class="form-group output-group">
+                <label for="output">Generated JSON:</label>
+                <textarea id="output" rows="10" readonly placeholder="Generated n8n JSON will appear here..."></textarea>
+                <!-- CHANGED: Removed the small SVG copy button from here -->
+            </div>
+
+            <!-- CHANGED: Added a new, larger copy button below the text area -->
+            <button id="copyJsonBtn">Copy Generated JSON</button>
+            <!-- CHANGED: Added a dedicated paragraph for the copy status message -->
+            <p id="copy-message" class="status-message"></p>
+
+            <p id="status" class="status-message"></p>
+
+             <!-- CHANGED: Added the help link paragraph -->
+             <p class="help-link">
+                Need help? Visit our <a href="far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br> <a href="far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
+             </p>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <h2>API Keys & Models</h2>
+            <p class="info">Your keys are stored locally in your browser and are not shared.</p>
+            <div class="form-group">
+                <label for="openaiKey">OpenAI API Key:</label>
+                <input type="password" id="openaiKey" placeholder="Enter your OpenAI key (sk-...)">
+            </div>
+            <div class="form-group">
+                <label for="geminiKey">Gemini API Key:</label>
+                <input type="password" id="geminiKey" placeholder="Enter your Google AI Studio key">
+            </div>
+             <div class="form-group">
+                <label for="openaiModelSelect">OpenAI Model:</label>
+                 <select id="openaiModelSelect" disabled>
+                     <option value="" disabled selected>Enter API Key to load models...</option>
+                 </select>
+                 <small>Recommended: gpt-4o-mini, gpt-4-turbo, gpt-4o</small>
+            </div>
+            <div class="form-group">
+                <label for="geminiModelSelect">Gemini Model:</label>
+                 <select id="geminiModelSelect" disabled>
+                     <option value="" disabled selected>Enter API Key to load models...</option>
+                 </select>
+                <small>Recommended: gemini-1.5-flash-latest, gemini-1.5-pro-latest</small>
+            </div>
+            <button id="saveSettingsBtn">Save Settings</button>
+             <p id="settings-status" class="status-message"></p>
+        </div>
+
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

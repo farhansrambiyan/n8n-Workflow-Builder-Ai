@@ -1,0 +1,257 @@
+body {
+    font-family: sans-serif;
+    width: 450px; /* Adjusted width */
+    max-height: 580px;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    padding: 15px;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #090909; /* n8n-like green */
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.tabs {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-button {
+    flex-grow: 1;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 1em;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    color: #555;
+}
+
+.tab-button.active {
+    border-bottom-color: #090909;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #090909
+}
+
+.tab-button:hover:not(.active) {
+     border-bottom-color: #ccc;
+     color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group textarea,
+.form-group select {
+    width: calc(100% - 16px); /* Account for padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.form-group input[type="password"] {
+     font-family: monospace; /* Better for password fields */
+}
+
+.form-group small {
+    display: block;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 4px;
+}
+
+button {
+    background-color: #090909;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* CHANGED: Make all buttons full width by default */
+    box-sizing: border-box; /* CHANGED: Include padding in width calculation */
+    margin-top: 5px; /* CHANGED: Add some top margin */
+}
+
+button:hover {
+    background-color: #090909;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* CHANGED: Removed specific width for generateBtn as it's covered by the general button style now */
+/* button#generateBtn { } */
+
+/* CHANGED: Specific styling for the new copy button (mostly inherited) */
+button#copyJsonBtn {
+     margin-top: 10px; /* Add space above the copy button */
+     background-color: #5a6268; /* A slightly different color for distinction */
+}
+button#copyJsonBtn:hover {
+     background-color: #4a4f54;
+}
+
+
+.output-group {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 0; /* CHANGED: Reduce bottom margin as button is now outside */
+}
+
+#output {
+    background-color: #e9e9e9;
+    font-family: monospace;
+    font-size: 0.85em;
+    color: #333;
+    width: 100%; /* Ensure textarea takes full width */
+    box-sizing: border-box; /* Include padding */
+}
+
+/* CHANGED: Removed styles for the old, absolutely positioned #copyBtn and #copy-status */
+/*
+#copyBtn { ... }
+#copyBtn:hover { ... }
+#copyBtn svg { ... }
+#copy-status { ... }
+#copy-status.visible { ... }
+*/
+
+/* CHANGED: Style for the new copy message paragraph */
+#copy-message {
+    margin-top: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    color: #090909; /* Green for success message */
+    display: none; /* Hidden by default */
+    min-height: 1.2em; /* Prevent layout shifts */
+}
+
+#copy-message.error {
+    color: #d9534f; /* Red for errors */
+}
+
+
+.status-message {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+    word-wrap: break-word; /* Allow long error messages to wrap */
+    min-height: 1.2em; /* Prevent layout shifts */
+}
+
+#status.error, #settings-status.error {
+    color: #d9534f; /* Red for errors */
+}
+
+#status.success, #settings-status.success {
+    color: #090909; /* Green for success */
+}
+
+#settings {
+    padding-top: 10px;
+}
+
+.info {
+    font-size: 0.85em;
+    color: #555;
+    margin-bottom: 15px;
+    background-color: #e7f3fe;
+    border-left: 4px solid #2196F3;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+/* Styles for select */
+.form-group select {
+    background-color: #fff; /* Ensure background */
+    color: #333;
+    cursor: pointer;
+}
+
+.form-group select:disabled {
+    background-color: #e9e9e9;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.form-group select option[disabled] {
+    color: #999;
+}
+
+/* CHANGED: Added style for the help link paragraph */
+.help-link {
+    margin-top: 20px; /* Add space above the link */
+    font-size: 0.9em;
+    text-align: center;
+    color: #555;
+}
+
+.help-link a {
+    color: #090909;
+    text-decoration: none;
+    line-height: 1.6
+}
+
+.help-link a:hover {
+    text-decoration: underline;
+}

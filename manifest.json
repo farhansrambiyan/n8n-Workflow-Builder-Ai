@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "n8n Workflow Builder Ai (Beta)", 
+  "version": "1.2", 
+  "description": "Generate n8n workflow/node JSON using your OpenAI or Gemini API key.",
+  "author": "farhan",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "n8n Workflow Builder Ai (Beta)" 
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite"
+  ],
+   "host_permissions": [
+    "https://api.openai.com/",
+    "https://generativelanguage.googleapis.com/"
+  ]
+}
