@@ -1,1 +1,1 @@
-# n8n-Workflow-Builder-Ai
+# n8n Workflow Builder Ai (beta)
