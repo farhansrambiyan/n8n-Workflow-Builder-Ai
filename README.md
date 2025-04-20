@@ -14,15 +14,11 @@ An open-source Chrome Extension designed to help n8n users quickly generate JSON
 
 ## Features
 
-*   ✨ **AI-Powered Generation:** Describe the n8n workflow or node you need in plain text.
-*   🤖 **Dual AI Support:** Choose between using OpenAI (GPT models) or Google Gemini.
-*   🔑 **Bring Your Own Key:** Uses your personal API keys, meaning no subscription fee for the extension itself. You only pay for your AI usage directly to the provider.
-*   🧠 **Dynamic Model Loading:** Automatically fetches available compatible models from OpenAI/Gemini once you provide a valid API key.
-*   📋 **Clipboard Integration:** Easily copy the generated JSON with a single click.
-*   📄 **Workflow & Node Support:** Attempts to generate JSON for both multi-node workflows (including basic connections) and single nodes.
-*   ⚙️ **Simple Interface:** Clean UI with separate tabs for generation and settings.
-*   🔒 **Secure Local Storage:** API keys are stored only in your browser's local storage, never transmitted elsewhere except directly to the respective AI provider.
-*   ❤️ **Open Source:** Free to use, modify, and contribute! (See License and Contributing sections).
+*   **AI-Powered Generation:** Describe the n8n workflow or node you need in plain text.
+*   **Dual AI Support:** Choose between using OpenAI (GPT models) or Google Gemini.
+*   **Bring Your Own Key:** Uses your personal API keys, meaning no subscription fee for the extension itself. You only pay for your AI usage directly to the provider.
+*   **Simple Interface:** Clean UI with separate tabs for generation and settings.
+*   **Secure Local Storage:** API keys are stored only in your browser's local storage, never transmitted elsewhere except directly to the respective AI provider.
 
 ## Why Use This Extension?
 
@@ -67,7 +63,7 @@ Before you can generate JSON, you need to provide your API keys:
     *   *Node Example:* `Generate an n8n Google Sheets node to append a row to spreadsheet ID 'YOUR_SHEET_ID' on sheet 'Sheet1'. The row should contain columns 'Name' with value '{{ $json.name }}' and 'Timestamp' with value '{{ $now }}'.`
 4.  **Generate:** Click the "Generate n8n JSON" button.
 5.  **Review Output:** The generated JSON will appear below. **Carefully review the JSON structure**, especially `parameters` and `connections`, to ensure it matches your expectations and n8n's requirements. The AI might occasionally make mistakes.
-6.  **Copy:** If the JSON looks correct and is valid, click the copy icon button (📋) next to the output box.
+6.  **Copy:** If the JSON looks correct and is valid, click the copy button.
 7.  **Paste in n8n:** Go to your n8n canvas, right-click (or use Ctrl/Cmd+V), and paste the copied JSON. n8n should create the node(s)/workflow.
 
 ## Important Notes & Disclaimers
