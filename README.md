@@ -6,12 +6,6 @@ An open-source Chrome Extension designed to help n8n users quickly generate JSON
 
 **Note:** This project is intended for **personal, non-commercial use**. Please respect the terms of service of the AI providers (OpenAI, Google).
 
-## Screenshot / Demo
-
-**(Insert a screenshot or GIF here showing the extension popup in action!)**
-
-*   *Example: A GIF showing entering a prompt, selecting a provider/model, generating JSON, and copying it.*
-
 ## Features
 
 *   **AI-Powered Generation:** Describe the n8n workflow or node you need in plain text.
