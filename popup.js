@@ -381,7 +381,16 @@ RULES:
 10. **For API integrations without specific nodes, use 'n8n-nodes-base.httpRequest' as the node type. Provide a basic HTTP request structure with placeholders for URL, method, and headers. Do not include authentication details unless specified by the user.
 11. **For data manipulation, use code node and For triggers, use webhook/cron nodes
 12. **For ai agent node use '@n8n/n8n-nodes-langchain.agent' and for tools use '@n8n/n8n-nodes-langchain.tools' node type and also for llm tool for ai agent use (example: Gemini): '@n8n/n8n-nodes-langchain.lmChatGoogleGemini' and if we using the llms for '@n8n/n8n-nodes-langchain.agent' we should use '@n8n/n8n-nodes-langchain.lmChatGoogleGemini' as a sub node as chat model, for detailed understanding check n8n documentation.
-13. **use '@n8n/n8n-nodes-langchain.agent' for generating emails and other ai functions always if not mentioned any other node type.`;
+13. **use '@n8n/n8n-nodes-langchain.agent' for generating emails and other ai functions always if not mentioned any other node type.
+14. **AI Agent Node Logic:
+    When the user requests an AI-powered action (like generating an email, summarizing text, answering a question, etc.), always use the '@n8n/n8n-nodes-langchain.agent' node.
+    Attach at least one chat model sub-node (e.g., '@n8n/n8n-nodes-langchain.lmChatGoogleGemini' or '@n8n/n8n-nodes-langchain.lmChatOpenAI') as a child of the AI Agent node to function as the LLM.
+    If external tools are needed (e.g., web scraping, searching, or other API integrations), add '@n8n/n8n-nodes-langchain.tools' nodes as sub-nodes and connect them to the AI Agent node.
+    For every AI Agent node, ensure the prompt is set either by taking input from the previous node (e.g., 'chatInput') or by defining it explicitly in the prompt field.
+    If the workflow involves chat or conversation, optionally add a memory sub-node to the AI Agent node to maintain context between messages.
+    Always ensure the AI Agent node is properly connected to its sub-nodes (chat model, tools, memory) and that these are included in the 'nodes' array and referenced in the 'connections' object.
+    For workflows using the AI Agent, the structure should clearly show the AI Agent node, its required sub-nodes, and how they interact with the rest of the workflow.
+    Use the 'Tools Agent' configuration unless otherwise specified, as this is the default and recommended setting in n8n v1.82+.`;
     }
 
 
