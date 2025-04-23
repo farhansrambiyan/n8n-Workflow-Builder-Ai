@@ -7,7 +7,9 @@ An open-source Chrome Extension designed to help n8n users quickly generate JSON
 **Note:** This project is intended for **personal, non-commercial use**. Please respect the terms of service of the AI providers (OpenAI, Google).
 
 Need help? Visit our FAQs & Guide: https://far.hn/n8n-workflow-builder-ai
+
 Report Bug or Request a feature: https://far.hn/feature-request
+
 Consider Donating via BMC: https://www.buymeacoffee.com/farhansrambiyan
 
 ## Features
