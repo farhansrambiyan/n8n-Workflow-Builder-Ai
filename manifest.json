@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "n8n Workflow Builder Ai (Beta)", 
-  "version": "1.2", 
+  "version": "1.2.1", 
   "description": "Generate n8n workflow/node JSON using your OpenAI or Gemini API key.",
   "author": "farhan",
   "icons": {
