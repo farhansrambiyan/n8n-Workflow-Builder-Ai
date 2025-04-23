@@ -50,6 +50,10 @@ Before you can generate JSON, you need to provide your API keys:
 
 ## How to Use
 
+Install directly from chrome webstore: https://chromewebstore.google.com/detail/n8n-workflow-builder-ai-b/jkncjfiaifpdoemifnelilkikhbjfbhd
+
+Or
+
 1.  **Open the Extension:** Click the n8n Workflow Builder AI icon.
 2.  **Select Provider:** On the "Generate" tab, choose "OpenAI (GPT)" or "Google Gemini" from the "AI Provider" dropdown.
 3.  **Write Your Prompt:** In the text box, clearly describe the n8n node or workflow you want to create. **Be specific!** The better the prompt, the better the result.
