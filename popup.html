@@ -4,21 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>n8n Workflow Builder Ai (Beta)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
     <div class="container">
-        <h1>n8n Workflow Builder Ai (Beta)</h1>
 
-        <div class="tabs">
-            <button class="tab-button active" data-tab="generate">Generate</button>
-            <button class="tab-button" data-tab="settings">Settings</button>
+        <!-- Header Container -->
+        <div class="header-container">
+            <img src="icons/logo.svg" alt="n8n Workflow Builder Ai Logo" id="logo">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="generate">Generate</button>
+                <button class="tab-button" data-tab="settings">Settings</button>
+            </div>
         </div>
+        <!-- END: Header Container -->
+
+
+        <hr class="separator"> <!-- Separator line -->
 
         <!-- Generate Tab -->
         <div id="generate" class="tab-content active">
             <div class="form-group">
-                <label for="aiProvider">AI Provider:</label>
+                <label for="aiProvider">Ai Provider:</label>
                 <select id="aiProvider">
                     <option value="openai">OpenAI (GPT)</option>
                     <option value="gemini">Google Gemini</option>
@@ -30,24 +40,27 @@
                 <textarea id="prompt" rows="5" placeholder="e.g., 'Create a workflow that triggers on a webhook, reads data from Google Sheets, and sends an email.' or 'A node that fetches weather data for a city.'"></textarea>
             </div>
 
-            <button id="generateBtn">Generate n8n JSON</button>
+            <button id="generateBtn">Generate</button>
 
+            <!-- Output Group -->
             <div class="form-group output-group">
+                <!-- REMOVED output-header wrapper -->
                 <label for="output">Generated JSON:</label>
-                <textarea id="output" rows="10" readonly placeholder="Generated n8n JSON will appear here..."></textarea>
-                <!-- CHANGED: Removed the small SVG copy button from here -->
+                <textarea id="output" rows="8" readonly placeholder="Generated n8n JSON will appear here...."></textarea>
+                <!-- MOVED copy-button-container AFTER textarea -->
+                <div class="copy-button-container">
+                     <button id="copyJsonBtn">Copy</button>
+                </div>
             </div>
+            <!-- End Output Group -->
 
-            <!-- CHANGED: Added a new, larger copy button below the text area -->
-            <button id="copyJsonBtn">Copy Generated JSON</button>
-            <!-- CHANGED: Added a dedicated paragraph for the copy status message -->
+
             <p id="copy-message" class="status-message"></p>
-
             <p id="status" class="status-message"></p>
 
-             <!-- CHANGED: Added the help link paragraph -->
              <p class="help-link">
-                Need help? Visit our <a href="https://far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br> <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
+                 Need help? Visit our <a href="https://far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br>
+                 <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
              </p>
         </div>
 
@@ -55,7 +68,8 @@
         <div id="settings" class="tab-content">
             <h2>API Keys & Models</h2>
             <p class="info">Your keys are stored locally in your browser and are not shared.</p>
-            <div class="form-group">
+            <!-- ... rest of settings fields ... -->
+             <div class="form-group">
                 <label for="openaiKey">OpenAI API Key:</label>
                 <input type="password" id="openaiKey" placeholder="Enter your OpenAI key (sk-...)">
             </div>
