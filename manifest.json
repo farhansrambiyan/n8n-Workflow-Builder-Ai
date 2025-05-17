@@ -1,14 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "n8n Workflow Builder Ai (Beta)", 
-  "version": "1.2.1", 
-  "description": "Generate n8n workflow/node JSON using your OpenAI or Gemini API key.",
+  "name": "n8n Workflow Builder Ai (Beta)",
+  "version": "1.2.3",
+  "description": "Generate n8n workflow/node JSON using your OpenAI, Gemini, Mistral, Claude, OpenRouter, Groq or Grok (x.ai) API key.",
   "author": "farhan",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
   },
   "action": {
     "default_icon": {
@@ -18,14 +21,24 @@
       "128": "icons/icon128.png"
     },
     "default_popup": "popup.html",
-    "default_title": "n8n Workflow Builder Ai (Beta)" 
+    "default_title": "n8n Workflow Builder Ai (Beta)"
+  },
+  "side_panel": {
+    "default_path": "popup.html"
   },
   "permissions": [
     "storage",
-    "clipboardWrite"
+    "clipboardWrite",
+    "sidePanel",
+    "notifications"
   ],
-   "host_permissions": [
+  "host_permissions": [
     "https://api.openai.com/",
-    "https://generativelanguage.googleapis.com/"
+    "https://generativelanguage.googleapis.com/",
+    "https://api.mistral.ai/",
+    "https://api.anthropic.com/",
+    "https://openrouter.ai/",
+    "https://api.groq.com/",
+    "https://api.x.ai/"
   ]
 }
