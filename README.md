@@ -2,9 +2,9 @@
 
 **Generate n8n workflow & node JSON using AI (OpenAI & Google Gemini) directly in your browser!**
 
-An open-source Chrome Extension designed to help n8n users quickly generate JSON configurations for workflows or individual nodes based on natural language prompts. This extension leverages the power of OpenAI (GPT models) or Google Gemini, using **your own API keys**, making the extension itself free to use.
+An open-source Chrome Extension designed to help n8n users quickly generate JSON configurations for workflows or individual nodes based on natural language prompts. This extension leverages the power of OpenAI, Gemini, Mistral, Claude, OpenRouter, Groq and Grok (x.ai) API keys, using **your own API keys**, making the extension itself free to use.
 
-**Note:** This project is intended for **personal, non-commercial use**. Please respect the terms of service of the AI providers (OpenAI, Google).
+**Note:** This project is intended for **personal, non-commercial use**. Please respect the terms of service of the AI providers (OpenAI, Gemini, Mistral, Claude, OpenRouter, Groq and Grok (x.ai)).
 
 Need help? Visit our FAQs & Guide: https://far.hn/n8n-workflow-builder-ai
 
@@ -15,7 +15,7 @@ Consider Donating via BMC: https://www.buymeacoffee.com/farhansrambiyan
 ## Features
 
 *   **AI-Powered Generation:** Describe the n8n workflow or node you need in plain text.
-*   **Dual AI Support:** Choose between using OpenAI (GPT models) or Google Gemini.
+*   **Multiple AI Support:** Choose between using OpenAI, Gemini, Mistral, Claude, OpenRouter, Groq or Grok (x.ai) API keys.
 *   **Bring Your Own Key:** Uses your personal API keys, meaning no subscription fee for the extension itself. You only pay for your AI usage directly to the provider.
 *   **Simple Interface:** Clean UI with separate tabs for generation and settings.
 *   **Secure Local Storage:** API keys are stored only in your browser's local storage, never transmitted elsewhere except directly to the respective AI provider.
@@ -61,7 +61,7 @@ Install directly from chrome webstore: https://chromewebstore.google.com/detail/
 Or
 
 1.  **Open the Extension:** Click the n8n Workflow Builder AI icon.
-2.  **Select Provider:** On the "Generate" tab, choose "OpenAI (GPT)" or "Google Gemini" from the "AI Provider" dropdown.
+2.  **Select Provider:** On the "Generate" tab, choose AI Provider from the dropdown.
 3.  **Write Your Prompt:** In the text box, clearly describe the n8n node or workflow you want to create. **Be specific!** The better the prompt, the better the result.
     *   *Workflow Example:* `Create a workflow: Start with a Schedule trigger running every Monday at 9 AM. Then, use an HTTP Request node to GET data from 'https://api.example.com/users'. Finally, use a Set node to extract only the 'email' field from the result.`
     *   *Node Example:* `Generate an n8n Google Sheets node to append a row to spreadsheet ID 'YOUR_SHEET_ID' on sheet 'Sheet1'. The row should contain columns 'Name' with value '{{ $json.name }}' and 'Timestamp' with value '{{ $now }}'.`
@@ -72,7 +72,7 @@ Or
 
 ## Important Notes & Disclaimers
 
-*   **API Costs:** Using this extension will make calls to the OpenAI or Google Gemini APIs using *your* keys. You are solely responsible for any costs incurred based on your usage with these providers. Monitor your usage on their respective platforms.
+*   **API Costs:** Using this extension will make calls to the ai models APIs using *your* keys. You are solely responsible for any costs incurred based on your usage with these providers. Monitor your usage on their respective platforms.
 *   **JSON Validity & Accuracy:** While the extension instructs the AI to generate valid and correctly structured n8n JSON, AI models can make mistakes. **Always review the generated JSON before pasting it into n8n.** Minor edits might be required, especially for complex nodes or specific parameter formats (like the `{ "values": [...] }` structure).
 *   **Security:** API keys are stored using `chrome.storage.local`, which is standard practice for extensions storing sensitive data locally. They are not sent to any third-party server by this extension. However, be mindful of general browser security.
 *   **Personal Use Only:** This extension is provided as an open-source tool primarily for personal, non-commercial use and learning purposes. Commercial use is not explicitly supported or tested.
@@ -113,3 +113,31 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 *   Powered by APIs from **OpenAI** and **Google**.
 
 ---
+
+Changelog:
+
+— Beta 0.2 —
+
+* UI Improvements 
+
+* Multiple AI Provider Support:
+    * Added support for Mistral AI.
+    * Added support for Anthropic (Claude).
+    * Added support for OpenRouter.
+    * Added support for Grok (x.ai).
+    * Added support for Groq.
+
+* Generation History Tab:
+    * New "History" tab to view, copy, or re-use previous generations.
+    * History items display the prompt, generated JSON, and timestamp.
+
+* Side Panel Display Mode:
+    * Added a setting in "Display Settings" to open the extension as a Side Panel.
+
+* Auto-Saving Settings:
+    * Settings (API keys, model selections, provider toggles, display mode) are now auto-saved on change/blur.
+
+* Provider Enable/Disable Toggles:
+    * In Settings, each AI provider can now be individually enabled or disabled using a toggle switch.
+    * Provider-specific settings (API key, model) are only shown if the provider is enabled.
+
