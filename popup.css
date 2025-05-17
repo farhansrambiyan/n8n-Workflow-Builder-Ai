@@ -8,7 +8,7 @@
 body {
     font-family: 'Manrope', sans-serif;
     width: 400px;
-    min-height: 580px;
+    min-height: 580px; /* May need adjustment depending on content */
     margin: 0;
     padding: 0;
     background-color: #131313;
@@ -20,6 +20,9 @@ body {
 .container {
     width: 100%;
     padding: 20px 25px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    min-height: 580px; /* Ensure container takes full height */
 }
 
 /* --- Header Container Styles --- */
@@ -30,16 +33,15 @@ body {
     margin-bottom: 20px;
 }
 
-/* --- Logo Styles --- */
 #logo {
     display: block;
-    max-width: 140px;
+    max-width: 100px;
     height: auto;
     margin: 0;
+    margin-right: auto; /* Push logo to the left */
 }
 
-/* --- Settings Header --- */
-h2 {
+h2 { /* Settings Page Title */
     font-size: 1.1em;
     margin-top: 0;
     margin-bottom: 15px;
@@ -49,7 +51,6 @@ h2 {
     color: #FFFFFF;
 }
 
-/* --- Tabs (Segmented Control Style) --- */
 .tabs {
     display: inline-flex;
     border: 1px solid #444444;
@@ -85,8 +86,6 @@ h2 {
     color: #FFFFFF;
 }
 
-
-/* --- Separator Line --- */
 hr.separator {
     border: none;
     height: 1px;
@@ -95,7 +94,6 @@ hr.separator {
     margin-bottom: 25px;
 }
 
-/* --- Tab Content --- */
 .tab-content {
     display: none;
 }
@@ -110,17 +108,21 @@ hr.separator {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Form Elements --- */
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
     font-weight: 600;
     font-size: 0.9em;
     color: #E0E0E0;
+    margin-bottom: 10px;
+}
+
+/* Specific styling for the AI Provider section */
+#generate .form-group:first-child {
+    margin-bottom: 25px;
 }
 
 .form-group input[type="text"],
@@ -153,13 +155,11 @@ hr.separator {
     box-shadow: 0 0 0 2px rgba(255, 79, 0, 0.3);
 }
 
-
-.form-group textarea { /* Base textarea style */
+.form-group textarea {
     resize: vertical;
-    min-height: 120px; /* Maybe slightly taller */
+    min-height: 120px;
 }
 
-/* Custom Select Arrow (White) */
 .form-group select {
     appearance: none;
     background-image: url('data:image/svg+xml;utf8,<svg fill="%23FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
@@ -181,7 +181,6 @@ hr.separator {
     background-color: #1C1C1C;
     color: #E0E0E0;
 }
-
 .form-group select option[disabled] {
     color: #888888;
 }
@@ -190,10 +189,17 @@ hr.separator {
     display: block;
     font-size: 0.8em;
     color: #999999;
-    margin-top: 6px;
+    margin-top: 8px;
+    line-height: 1.4;
 }
 
-/* --- Buttons (Generate/Save) --- */
+.hint-text {
+    color: #F59E0B !important; /* Warning orange color */
+    font-style: italic;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
 button#generateBtn,
 button#saveSettingsBtn {
     background-color: #F97316;
@@ -216,7 +222,6 @@ button#generateBtn {
     margin-bottom: 20px;
 }
 
-
 button#generateBtn:hover,
 button#saveSettingsBtn:hover {
     background-color: #EA580C;
@@ -230,21 +235,18 @@ button#saveSettingsBtn:disabled {
     opacity: 0.7;
 }
 
-/* --- Output Section Styling --- */
 .output-group {
-    position: relative; /* Make container relative for absolute child */
+    position: relative;
     margin-top: 20px;
-    margin-bottom: 10px; /* Reduce space below */
-    display: none; /* <<< HIDE BY DEFAULT */
+    margin-bottom: 10px;
+    /* display: none; Will be controlled by JS */
 }
 
-/* Ensure label is above textarea */
 .output-group label {
     display: block;
-    margin-bottom: 8px; /* Space between label and textarea */
+    margin-bottom: 8px;
 }
 
-/* Textarea styles */
 #output {
     background-color: #1C1C1C;
     font-family: monospace;
@@ -255,57 +257,71 @@ button#saveSettingsBtn:disabled {
     width: 100%;
     box-sizing: border-box;
     display: block;
-    padding: 10px; /* Standard padding */
-     /* Add padding bottom specifically to avoid text under the button */
-    padding-bottom: 50px; /* Adjust this value based on button height + desired spacing */
+    padding: 10px;
+    padding-bottom: 50px; /* For copy button */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #444444 #1C1C1C; /* Firefox */
 }
 
-/* Copy Button Container - No special alignment needed now */
+/* Webkit scrollbar styling (Chrome, Safari, Edge) */
+#output::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#output::-webkit-scrollbar-track {
+    background: #1C1C1C;
+    border-radius: 4px;
+}
+
+#output::-webkit-scrollbar-thumb {
+    background-color: #444444;
+    border-radius: 4px;
+    border: 2px solid #1C1C1C;
+}
+
+#output::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+}
+
 .copy-button-container {
    /* No styles needed here unless you want specific margins for the absolute button */
 }
 
-/* Absolute Positioned Copy Button */
 button#copyJsonBtn {
-    position: absolute; /* Position relative to output-group */
-    bottom: 10px;      /* Offset from bottom edge of output-group */
-    right: 10px;       /* Offset from right edge of output-group */
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     background-color: #F97316;
     color: white;
     border: none;
     border-radius: 6px;
     width: auto;
     display: inline-block;
-    padding: 8px 20px; /* Keep desired padding */
+    padding: 8px 20px;
     font-size: 0.95em;
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    z-index: 10; /* Ensure it's above the textarea content */
+    z-index: 10;
 }
 button#copyJsonBtn:hover {
     background-color: #EA580C;
 }
 
-
-/* Status message below output */
 #copy-message {
-    margin-top: 8px; /* Space above copy status message */
+    margin-top: 8px;
     font-size: 0.85em;
     font-weight: 600;
-    text-align: right; /* Align near where button is */
-    padding-right: 10px; /* Align better under button */
-    color: #22C55E;
-    display: none; /* Keep this hidden by default too */
+    text-align: right;
+    padding-right: 10px;
+    color: #22C55E; /* Success color */
+    display: none; /* Controlled by JS */
     min-height: 1.1em;
 }
+#copy-message.error { color: #EF4444; }
 
-#copy-message.error {
-    color: #EF4444;
-}
-
-/* General status message below copy status */
-.status-message { /* This is the main #status and #settings-status */
+.status-message {
     margin-top: 5px;
     font-size: 0.85em;
     text-align: center;
@@ -313,21 +329,27 @@ button#copyJsonBtn:hover {
     min-height: 1.1em;
     color: #AAAAAA;
 }
+.status-message.error { color: #EF4444; }
+.status-message.success { color: #22C55E; }
+.status-message.warning { color: #F59E0B; } /* Added warning color */
 
-#status.error, #settings-status.error {
-    color: #EF4444;
+
+#settings { padding-top: 0; }
+
+/* Settings Section Styling */
+.settings-section {
+    margin-bottom: 25px;
 }
 
-#status.success, #settings-status.success {
-    color: #22C55E;
+.settings-section h2 {
+    margin-bottom: 18px;
 }
 
-/* --- Settings Specific --- */
-#settings {
-    padding-top: 0;
+.settings-section .form-group label {
+    margin-bottom: 10px;
 }
 
-.info {
+.info { /* For general info message in settings */
     font-size: 0.85em;
     color: #B0B0B0;
     margin-bottom: 20px;
@@ -337,7 +359,6 @@ button#copyJsonBtn:hover {
     border-radius: 3px;
 }
 
-/* --- Help Links --- */
 .help-link {
     margin-top: 25px;
     padding-top: 0;
@@ -347,14 +368,454 @@ button#copyJsonBtn:hover {
     color: #888888;
     line-height: 1.5;
 }
+.help-link a { color: #AAAAAA; text-decoration: none; font-weight: 600; }
+.help-link a:hover { text-decoration: underline; color: #CCCCCC; }
 
-.help-link a {
-    color: #AAAAAA;
-    text-decoration: none;
-    font-weight: 600;
+/* --- NEW STYLES FOR PROVIDER TOGGLES (ADD THESE) --- */
+.settings-provider-container {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #333333;
+    border-radius: 8px; /* Slightly more rounded */
+    background-color: #1A1A1A;
+    transition: background-color 0.2s ease-in-out;
+}
+.settings-provider-container.active { /* When details are shown */
+    background-color: #202020; /* Slightly lighter when active */
 }
 
-.help-link a:hover {
-    text-decoration: underline;
+.provider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 15px; Removed as details have their own margin */
+    /* cursor: pointer; -- if you want header click to toggle too */
+}
+
+.provider-label {
+    font-weight: 700;
+    font-size: 1em;
+    color: #FFFFFF;
+}
+
+/* Recommended Badge Styling */
+.recommended-badge {
+    display: inline-block;
+    background-color: #22C55E;
+    color: #000000;
+    font-size: 0.7em;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.provider-details {
+    display: none; /* Hidden by default */
+    padding-top: 15px;
+    border-top: 1px solid #383838; /* Separator when details are shown */
+    margin-top: 15px;
+}
+
+.settings-provider-container.active .provider-details {
+    display: block; /* Show when container has .active class */
+}
+
+/* Toggle Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #404040; /* Off state */
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #F97316; /* n8n Orange for ON state */
+}
+
+input:focus + .slider { /* Optional focus style */
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.3);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Hide the old sub-separators if using the new container style */
+hr.sub-separator {
+    display: none; 
+}
+
+#no-provider-enabled-message { /* Already in HTML, ensure styling */
+    text-align: center;
+    color: #AAAAAA;
+    margin-top: -10px; /* Adjust based on select element */
+    margin-bottom: 15px;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* Side Panel Optimization */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        min-width: 250px;
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .header-container {
+        flex-direction: row; /* Keep as row to keep logo left-aligned */
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+    
+    #logo {
+        max-width: 120px; /* Slightly smaller logo on mobile */
+        margin-right: auto;
+    }
+    
+    .tabs {
+        width: auto;
+    }
+    
+    .form-group input, .form-group textarea, .form-group select {
+        width: 100%;
+    }
+    
+    .provider-details {
+        padding: 12px;
+    }
+    
+    .settings-provider-container {
+        margin-bottom: 15px;
+    }
+}
+
+/* When in side panel, maximize available space */
+body.in-side-panel .container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Footer Styles */
+.footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #333333;
+    width: 100%;
+}
+
+.tab-content {
+    flex-grow: 1; /* Allow tab content to grow and push footer down */
+}
+
+/* Update help-link styles to fit footer */
+.help-link {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    font-size: 0.8em;
+    text-align: center;
+    color: #888888;
+    line-height: 1.5;
+}
+
+/* Tab Icon Styles */
+.tab-icon {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+
+.tab-button.active .tab-icon {
+    stroke: #121212;
+}
+
+/* History Tab Styles */
+.centered-message {
+    text-align: center;
+    color: #888888;
+    margin: 30px 0;
+    font-style: italic;
+}
+
+#history-items-container {
+    margin-top: 15px;
+}
+
+.history-item {
+    background-color: #1A1A1A;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.2s ease;
+}
+
+.history-item:hover {
+    background-color: #222222;
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.history-item-title {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #FFFFFF;
+    margin: 0;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.history-item-date {
+    font-size: 0.8em;
+    color: #888888;
+    margin-left: 10px;
+}
+
+.history-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.history-action-button {
+    background-color: transparent;
+    border: none;
+    color: #AAAAAA;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-action-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
+
+.history-action-button.delete:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #EF4444;
+}
+
+.history-item-prompt {
+    background-color: #1C1C1C;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
     color: #CCCCCC;
+    max-height: 100px;
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #444444 #1C1C1C; /* Firefox */
+}
+
+.history-item-json {
+    background-color: #1C1C1C;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.85em;
+    color: #CCCCCC;
+    max-height: 150px;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #444444 #1C1C1C; /* Firefox */
+}
+
+/* Apply scrollbar styles to history items and any code elements */
+.history-item-json::-webkit-scrollbar,
+.history-item-prompt::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.history-item-json::-webkit-scrollbar-track,
+.history-item-prompt::-webkit-scrollbar-track {
+    background: #1C1C1C;
+    border-radius: 4px;
+}
+
+.history-item-json::-webkit-scrollbar-thumb,
+.history-item-prompt::-webkit-scrollbar-thumb {
+    background-color: #444444;
+    border-radius: 4px;
+    border: 2px solid #1C1C1C;
+}
+
+.history-item-json::-webkit-scrollbar-thumb:hover,
+.history-item-prompt::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+}
+
+/* Add the same scrollbar style to the prompt textarea */
+#prompt {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #444444 #1C1C1C; /* Firefox */
+}
+
+#prompt::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#prompt::-webkit-scrollbar-track {
+    background: #1C1C1C;
+    border-radius: 4px;
+}
+
+#prompt::-webkit-scrollbar-thumb {
+    background-color: #444444;
+    border-radius: 4px;
+    border: 2px solid #1C1C1C;
+}
+
+#prompt::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+}
+
+/* JSON Syntax Highlighting */
+.json-key {
+    color: #F59E0B;
+}
+.json-string {
+    color: #10B981;
+}
+.json-number {
+    color: #60A5FA;
+}
+.json-boolean {
+    color: #EC4899;
+}
+.json-null {
+    color: #9CA3AF;
+}
+
+/* --- Unified Scrollbar Styles for Dark Mode --- */
+/* This applies to all scrollable elements */
+.custom-scrollbar {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #444444 #1C1C1C; /* Firefox */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #1C1C1C;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #444444;
+    border-radius: 4px;
+    border: 2px solid #1C1C1C;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+}
+
+/* Prompt Container with Clear Button */
+.prompt-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Action Container for Clear Button */
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.clear-button {
+    background-color: #444444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.clear-button:hover {
+    opacity: 1;
+    background-color: #666666;
+}
+
+/* Generation In Progress Indicator */
+.generation-background-indicator {
+    font-size: 0.85em;
+    color: #888888;
+    text-align: center;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgba(245, 158, 11, 0.1); /* Updated to match yellow badge color #F59E0B */
+    display: none;
+}
+
+/* Label with Action Button */
+.label-with-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.label-with-action label {
+    margin-bottom: 0;
 }
