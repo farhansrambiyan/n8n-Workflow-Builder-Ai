@@ -12,87 +12,267 @@
 <body>
     <div class="container">
 
-        <!-- Header Container -->
         <div class="header-container">
             <img src="icons/logo.svg" alt="n8n Workflow Builder Ai Logo" id="logo">
             <div class="tabs">
                 <button class="tab-button active" data-tab="generate">Generate</button>
+                <button class="tab-button" data-tab="history">History</button>
                 <button class="tab-button" data-tab="settings">Settings</button>
             </div>
         </div>
-        <!-- END: Header Container -->
+        <hr class="separator">
 
-
-        <hr class="separator"> <!-- Separator line -->
-
-        <!-- Generate Tab -->
         <div id="generate" class="tab-content active">
             <div class="form-group">
-                <label for="aiProvider">Ai Provider:</label>
+                <label for="aiProvider">Enabled Ai Provider:</label>
                 <select id="aiProvider">
-                    <option value="openai">OpenAI (GPT)</option>
-                    <option value="gemini">Google Gemini</option>
+                    <option value="" disabled selected>No providers enabled in Settings</option>
                 </select>
             </div>
+            <p id="no-provider-enabled-message" style="display:none; text-align: center; color: #AAAAAA; margin-top: -10px; margin-bottom:15px; font-style: italic;">
+                Please enable and configure at least one AI provider in the Settings tab.
+            </p>
 
             <div class="form-group">
-                <label for="prompt">Describe the node or workflow:</label>
-                <textarea id="prompt" rows="5" placeholder="e.g., 'Create a workflow that triggers on a webhook, reads data from Google Sheets, and sends an email.' or 'A node that fetches weather data for a city.'"></textarea>
+                <div class="label-with-action">
+                    <label for="prompt">Describe the node or workflow:</label>
+                    <button id="clearBtn" class="clear-button" style="display:none;" title="Clear prompt and output">Clear</button>
+                </div>
+                <div class="prompt-container">
+                    <textarea id="prompt" class="custom-scrollbar" rows="5" placeholder="e.g., 'Create a workflow that triggers on a webhook, reads data from Google Sheets, and sends an email.' or 'A node that fetches weather data for a city.'"></textarea>
+                </div>
             </div>
 
             <button id="generateBtn">Generate</button>
 
-            <!-- Output Group -->
-            <div class="form-group output-group">
-                <!-- REMOVED output-header wrapper -->
+            <div class="form-group output-group" style="display:none;">
                 <label for="output">Generated JSON:</label>
-                <textarea id="output" rows="8" readonly placeholder="Generated n8n JSON will appear here...."></textarea>
-                <!-- MOVED copy-button-container AFTER textarea -->
+                <textarea id="output" class="custom-scrollbar" rows="8" readonly placeholder="Generated n8n JSON will appear here...."></textarea>
                 <div class="copy-button-container">
                      <button id="copyJsonBtn">Copy</button>
                 </div>
             </div>
-            <!-- End Output Group -->
-
 
             <p id="copy-message" class="status-message"></p>
             <p id="status" class="status-message"></p>
-
-             <p class="help-link">
-                 Need help? Visit our <a href="https://far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br>
-                 <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
-             </p>
         </div>
 
-        <!-- Settings Tab -->
+        <!-- History Tab Content -->
+        <div id="history" class="tab-content">
+            <h2>Generation History</h2>
+            <p class="info">Your previous workflow and node generations are stored locally.</p>
+            
+            <!-- No history message (shown when empty) -->
+            <p id="no-history-message" class="centered-message">No generation history yet. Generate some JSON to see it here.</p>
+            
+            <!-- History items container -->
+            <div id="history-items-container">
+                <!-- History items will be populated by JavaScript -->
+            </div>
+        </div>
+
         <div id="settings" class="tab-content">
-            <h2>API Keys & Models</h2>
-            <p class="info">Your keys are stored locally in your browser and are not shared.</p>
-            <!-- ... rest of settings fields ... -->
-             <div class="form-group">
-                <label for="openaiKey">OpenAI API Key:</label>
-                <input type="password" id="openaiKey" placeholder="Enter your OpenAI key (sk-...)">
+            <!-- Display Mode Setting (Moved to top) -->
+            <div class="settings-section">
+                <h2>Display Settings</h2>
+                <div class="form-group">
+                    <label for="displayMode">Display Mode:</label>
+                    <select id="displayMode" class="auto-save">
+                        <option value="popup">Popup Window</option>
+                        <option value="sidepanel">Side Panel</option>
+                    </select>
+                    <small>Choose how you want the extension to open. Changes take effect after restarting the extension.</small>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="geminiKey">Gemini API Key:</label>
-                <input type="password" id="geminiKey" placeholder="Enter your Google AI Studio key">
+
+            <h2>API Keys & Models Configuration</h2>
+            <p class="info">Enable providers you want to use. API keys are stored locally.</p>
+            
+            <!-- OpenAI -->
+            <div class="settings-provider-container" data-provider-id="openai">
+                <div class="provider-header">
+                    <span class="provider-label">OpenAI (GPT) <span class="recommended-badge">Recommended</span></span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="openai">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="openaiKey">API Key:</label>
+                        <input type="password" id="openaiKey" class="auto-save-blur" placeholder="Enter your OpenAI key (sk-...)">
+                    </div>
+                    <div class="form-group">
+                        <label for="openaiModelSelect">Model:</label>
+                        <select id="openaiModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Use the latest model to get better results. Try other models if it fails.</small>
+                    </div>
+                </div>
             </div>
-             <div class="form-group">
-                <label for="openaiModelSelect">OpenAI Model:</label>
-                 <select id="openaiModelSelect" disabled>
-                     <option value="" disabled selected>Enter API Key to load models...</option>
-                 </select>
-                 <small>Recommended: gpt-4o-mini, gpt-4-turbo, gpt-4o</small>
+
+            <!-- Google Gemini -->
+            <div class="settings-provider-container" data-provider-id="gemini">
+                <div class="provider-header">
+                    <span class="provider-label">Google Gemini</span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="gemini">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="geminiKey">API Key:</label>
+                        <input type="password" id="geminiKey" class="auto-save-blur" placeholder="Enter your Google AI Studio key">
+                    </div>
+                    <div class="form-group">
+                        <label for="geminiModelSelect">Model:</label>
+                        <select id="geminiModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Use the latest model to get better results. Try other models if it fails.</small>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="geminiModelSelect">Gemini Model:</label>
-                 <select id="geminiModelSelect" disabled>
-                     <option value="" disabled selected>Enter API Key to load models...</option>
-                 </select>
-                <small>Recommended: gemini-1.5-flash-latest, gemini-1.5-pro-latest</small>
+            
+            <!-- Mistral AI -->
+            <div class="settings-provider-container" data-provider-id="mistral">
+                <div class="provider-header">
+                    <span class="provider-label">Mistral AI</span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="mistral">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="mistralApiKey">API Key:</label>
+                        <input type="password" id="mistralApiKey" class="auto-save-blur" placeholder="Enter your Mistral API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="mistralModelSelect">Model:</label>
+                        <select id="mistralModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Use the latest model to get better results. Try other models if it fails.</small>
+                    </div>
+                </div>
             </div>
-            <button id="saveSettingsBtn">Save Settings</button>
-             <p id="settings-status" class="status-message"></p>
+
+            <!-- Anthropic (Claude) -->
+            <div class="settings-provider-container" data-provider-id="claude">
+                <div class="provider-header">
+                    <span class="provider-label">Anthropic (Claude) <span class="recommended-badge">Recommended</span></span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="claude">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="claudeApiKey">API Key:</label>
+                        <input type="password" id="claudeApiKey" class="auto-save-blur" placeholder="Enter your Anthropic API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="claudeModelSelect">Model:</label>
+                        <select id="claudeModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Use the latest model to get better results. Try other models if it fails.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OpenRouter -->
+            <div class="settings-provider-container" data-provider-id="openrouter">
+                <div class="provider-header">
+                    <span class="provider-label">OpenRouter</span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="openrouter">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="openrouterApiKey">API Key:</label>
+                        <input type="password" id="openrouterApiKey" class="auto-save-blur" placeholder="Enter your OpenRouter API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="openrouterModelSelect">Model:</label>
+                        <select id="openrouterModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Note: Not all models will generate valid JSON. Try other models if generation fails.</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grok -->
+            <div class="settings-provider-container" data-provider-id="groq">
+                <div class="provider-header">
+                    <span class="provider-label">Grok (x.ai) <span class="recommended-badge">Recommended</span></span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="groq">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="groqApiKey">API Key:</label>
+                        <input type="password" id="groqApiKey" class="auto-save-blur" placeholder="Enter your x.ai API key (xai-...)">
+                    </div>
+                    <div class="form-group">
+                        <label for="groqModelSelect">Model:</label>
+                        <select id="groqModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Use the latest model to get better results. Try other models if it fails. For large workflows, consider using a different provider.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real Groq -->
+            <div class="settings-provider-container" data-provider-id="realgroq">
+                <div class="provider-header">
+                    <span class="provider-label">Groq</span>
+                    <label class="switch">
+                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="realgroq">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="provider-details">
+                    <div class="form-group">
+                        <label for="realGroqApiKey">API Key:</label>
+                        <input type="password" id="realGroqApiKey" class="auto-save-blur" placeholder="Enter your Groq API key">
+                    </div>
+                    <div class="form-group">
+                        <label for="realGroqModelSelect">Model:</label>
+                        <select id="realGroqModelSelect" class="auto-save" disabled>
+                            <option value="" disabled selected>Enable & Enter API Key...</option>
+                        </select>
+                        <small></small>
+                        <small class="hint-text">Note: Not all models will generate valid JSON. Try other models if generation fails.</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REMOVED Save Settings Button -->
+            <p id="settings-status" class="status-message" style="margin-top: 20px;"></p> <!-- Keep for feedback -->
+        </div>
+
+        <!-- Footer with help links -->
+        <div class="footer">
+            <p class="help-link">
+                Need help? Visit our <a href="https://far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br>
+                <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
+            </p>
         </div>
 
     </div>
