@@ -5,10 +5,175 @@
     padding: 0;
 }
 
+/* --- Login Screen Styles --- */
+.login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 580px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* --- Onboarding / Tutorial --- */
+.onboarding {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 580px;
+    width: 100%;
+}
+
+.onboarding-inner {
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+.onboarding-logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    display: block;
+}
+
+.onboarding-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #E0E0E0;
+    margin-bottom: 6px;
+}
+
+.onboarding-sub {
+    color: #AAAAAA;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.slides-container {
+    position: relative;
+    background: #1A1A1A;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+    padding: 18px 16px 16px 16px;
+}
+.slide.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+
+.slide h2 { font-size: 16px; margin: 8px 0 6px 0; }
+.slide p { color: #CFCFCF; font-size: 13px; line-height: 1.5; }
+
+.slide-image { display:flex; align-items:center; justify-content:center; height:140px; background:#181818; border-radius:8px; border:1px solid #2a2a2a; }
+.slide-image img { width: 100%; height: 100%; object-fit: contain; opacity: 0.95; }
+
+.slides-controls { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top: 12px; }
+.slides-controls .secondary { background:#444444; }
+
+.dots { display:flex; gap:6px; align-items:center; justify-content:center; flex:1;}
+.dots .dot { width:8px; height:8px; border-radius:50%; background:#555; }
+.dots .dot.active { background:#F97316; }
+
+#onboardingNext, #onboardingPrev, .get-started {
+    background-color: #F97316;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+#onboardingPrev { background:#444; }
+
+.get-started { width:100%; margin-top:12px; }
+.skip { margin-top:8px; background:transparent; border:none; color:#AAAAAA; cursor:pointer; font-size:12px; text-decoration: underline; }
+
+.login-container {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.login-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    display: block;
+}
+
+.login-container h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #E0E0E0;
+    margin-bottom: 8px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.login-subtitle {
+    color: #AAAAAA;
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.4;
+}
+
+.sign-in-button {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #d8771d;
+    color: #f1eaea;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    margin-bottom: 16px;
+}
+
+.sign-in-button:hover {
+    background-color: #f3880e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sign-in-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-terms {
+    color: #888888;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+}
+.login-terms a {
+    color: #888888;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+/* --- Main Content Styles --- */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 580px;
+}
 body {
     font-family: 'Manrope', sans-serif;
     width: 400px;
-    min-height: 580px; /* May need adjustment depending on content */
+    min-height: 580px;
     margin: 0;
     padding: 0;
     background-color: #131313;
@@ -22,26 +187,29 @@ body {
     padding: 20px 25px 25px 25px;
     display: flex;
     flex-direction: column;
-    min-height: 580px; /* Ensure container takes full height */
+    min-height: 580px;
 }
 
 /* --- Header Container Styles --- */
 .header-container {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    padding: 0;
 }
+
 
 #logo {
     display: block;
-    max-width: 100px;
+    max-width: 130px;
     height: auto;
     margin: 0;
-    margin-right: auto; /* Push logo to the left */
+    margin-right: auto;
 }
 
-h2 { /* Settings Page Title */
+h2 {
     font-size: 1.1em;
     margin-top: 0;
     margin-bottom: 15px;
@@ -56,24 +224,39 @@ h2 { /* Settings Page Title */
     border: 1px solid #444444;
     border-radius: 8px;
     background-color: #1F1F1F;
-    padding: 3px;
+    padding: 4px;
     margin-bottom: 0;
     overflow: hidden;
+    gap: 3px;
 }
-
 .tab-button {
     background-color: transparent;
     border: none;
     border-radius: 5px;
     color: #CCCCCC;
-    padding: 6px 15px;
+    padding: 10px;
     cursor: pointer;
     font-size: 0.9em;
     font-weight: 600;
     text-align: center;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    flex-grow: 1;
+    flex: 1;
     margin: 0;
+    min-width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
 }
 
 .tab-button.active {
@@ -84,6 +267,7 @@ h2 { /* Settings Page Title */
 
 .tab-button:hover:not(.active) {
     color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 hr.separator {
@@ -96,6 +280,7 @@ hr.separator {
 
 .tab-content {
     display: none;
+     flex-grow: 1; /* Allow tab content to grow and push footer down */
 }
 
 .tab-content.active {
@@ -124,6 +309,7 @@ hr.separator {
 #generate .form-group:first-child {
     margin-bottom: 25px;
 }
+
 
 .form-group input[type="text"],
 .form-group input[type="password"],
@@ -194,7 +380,7 @@ hr.separator {
 }
 
 .hint-text {
-    color: #F59E0B !important; /* Warning orange color */
+    color: #F59E0B !important;
     font-style: italic;
     margin-top: 5px !important;
     margin-bottom: 5px !important;
@@ -239,7 +425,7 @@ button#saveSettingsBtn:disabled {
     position: relative;
     margin-top: 20px;
     margin-bottom: 10px;
-    /* display: none; Will be controlled by JS */
+    display: none;
 }
 
 .output-group label {
@@ -285,7 +471,7 @@ button#saveSettingsBtn:disabled {
 }
 
 .copy-button-container {
-   /* No styles needed here unless you want specific margins for the absolute button */
+   position: relative;
 }
 
 button#copyJsonBtn {
@@ -336,7 +522,7 @@ button#copyJsonBtn:hover {
 
 #settings { padding-top: 0; }
 
-/* Settings Section Styling */
+/* Settings Section Styling
 .settings-section {
     margin-bottom: 25px;
 }
@@ -347,7 +533,7 @@ button#copyJsonBtn:hover {
 
 .settings-section .form-group label {
     margin-bottom: 10px;
-}
+} */
 
 .info { /* For general info message in settings */
     font-size: 0.85em;
@@ -388,14 +574,74 @@ button#copyJsonBtn:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin-bottom: 15px; Removed as details have their own margin */
-    /* cursor: pointer; -- if you want header click to toggle too */
 }
 
 .provider-label {
     font-weight: 700;
     font-size: 1em;
     color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    color: #ffffffb7;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: help;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    /* transform: translateX(-50%); */
+    background-color: #1F2937;
+    color: #FFFFFF;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: normal;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    min-width: 200px;
+    max-width: 300px;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.3;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.info-icon::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1F2937;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.info-icon:hover::after,
+.info-icon:hover::before {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Recommended Badge Styling */
@@ -492,20 +738,20 @@ hr.sub-separator {
 @media (max-width: 600px) {
     .container {
         width: 100%;
-        min-width: 250px;
+        min-width: 150px;
         max-width: 100%;
         padding: 15px;
     }
     
     .header-container {
-        flex-direction: row; /* Keep as row to keep logo left-aligned */
+        display: flex ;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         margin-bottom: 15px;
     }
     
     #logo {
-        max-width: 120px; /* Slightly smaller logo on mobile */
+        max-width: 130px; /* Same size logo on mobile */
         margin-right: auto;
     }
     
@@ -539,33 +785,6 @@ body.in-side-panel .container {
     border-top: 1px solid #333333;
     width: 100%;
 }
-
-.tab-content {
-    flex-grow: 1; /* Allow tab content to grow and push footer down */
-}
-
-/* Update help-link styles to fit footer */
-.help-link {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-    font-size: 0.8em;
-    text-align: center;
-    color: #888888;
-    line-height: 1.5;
-}
-
-/* Tab Icon Styles */
-.tab-icon {
-    display: inline-block;
-    vertical-align: -2px;
-    margin-right: 4px;
-}
-
-.tab-button.active .tab-icon {
-    stroke: #121212;
-}
-
 /* History Tab Styles */
 .centered-message {
     text-align: center;
@@ -772,13 +991,6 @@ body.in-side-panel .container {
     width: 100%;
 }
 
-/* Action Container for Clear Button */
-.action-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
-}
-
 .clear-button {
     background-color: #444444;
     color: white;
@@ -795,19 +1007,6 @@ body.in-side-panel .container {
     opacity: 1;
     background-color: #666666;
 }
-
-/* Generation In Progress Indicator */
-.generation-background-indicator {
-    font-size: 0.85em;
-    color: #888888;
-    text-align: center;
-    margin-top: 5px;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: rgba(245, 158, 11, 0.1); /* Updated to match yellow badge color #F59E0B */
-    display: none;
-}
-
 /* Label with Action Button */
 .label-with-action {
     display: flex;
@@ -818,4 +1017,309 @@ body.in-side-panel .container {
 
 .label-with-action label {
     margin-bottom: 0;
+}
+
+/* Debug Assistant Styles */
+.debug-chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    border: 1px solid #404040;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.debug-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #1C1C1C;
+}
+
+.debug-message {
+    max-width: 85%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+.debug-message.user {
+    align-self: flex-end;
+    background-color: #FF4900;
+    color: #FFFFFF;
+}
+
+.debug-message.assistant {
+    align-self: flex-start;
+    background-color: #333333;
+    color: #E0E0E0;
+}
+
+/* Add styling for lists within assistant messages */
+.debug-message.assistant ul,
+.debug-message.assistant ol {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.debug-message.assistant li {
+    margin-bottom: 6px;
+}
+
+/* Add styling for paragraphs in messages to ensure proper spacing */
+.debug-message.assistant p {
+    margin-bottom: 8px;
+}
+
+/* Add styling for points with bullets */
+.debug-message.assistant .point {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.debug-message.assistant .point:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #FF4900;
+}
+
+/* Preserve whitespace in pre-formatted text */
+.debug-message.assistant pre,
+.debug-message.assistant code {
+    background-color: #222;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    margin: 6px 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+.debug-input-container {
+    display: flex;
+    padding: 10px;
+    background-color: #1A1A1A;
+    border-top: 1px solid #404040;
+}
+
+.debug-input {
+    flex: 1;
+    resize: none;
+    border: 1px solid #404040;
+    border-radius: 6px;
+    padding: 10px 12px;
+    background-color: #1C1C1C;
+    color: #E0E0E0;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.0em;
+    margin-right: 10px;
+}
+
+.debug-input:focus {
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px rgba(255, 79, 0, 0.3);
+}
+
+.send-button {
+    background-color: #FF4900;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.send-button:hover {
+    background-color: #E64100;
+}
+
+.send-button:disabled {
+    background-color: #662D14;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Typing indicator */
+.typing-indicator .message-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.typing-indicator .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #E0E0E0;
+    margin: 0 3px;
+    animation: typing-animation 1.4s infinite ease-in-out;
+}
+
+.typing-indicator .dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-animation {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+    30% {
+        transform: translateY(-5px);
+        opacity: 1;
+    }
+}
+
+
+/* Add styles for the permission button */
+.permission-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.permission-button:hover {
+    background-color: #45a049;
+}
+
+.permission-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Helper text style */
+.helper-text {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+    font-style: italic;
+}
+/* --- Permission Button Styles --- */
+.request-permission-button {
+    background-color: #F97316;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    width: 100%;
+    display: block;
+    transition: background-color 0.2s ease;
+    font-family: 'Manrope', sans-serif;
+}
+
+.request-permission-button:hover {
+    background-color: #EA580C;
+}
+
+
+/* Profile Tab Styles */
+.profile-info-container {
+    background-color: #1A1A1A;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #444444;
+    object-fit: cover;
+    background-color: #333333;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 5px 0;
+}
+
+.profile-email {
+    font-size: 0.9em;
+    color: #AAAAAA;
+    margin: 0;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile-logout-button {
+    background-color: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+    font-family: 'Manrope', sans-serif;
+}
+
+.profile-logout-button:hover {
+    background-color: #DC2626;
+}
+
+.profile-logout-button svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
 }

@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    background-color: #121212;
+    color: #E1E1E1;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .auth-card {
+    background-color: #1F1F1F;
+    border-radius: 12px;
+    width: 420px;
+    max-width: 100%;
+    padding: 48px 36px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    position: relative;
+  }
+  .auth-card h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 16px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: background 0.2s;
+    background: transparent;
+    color: #E1E1E1;
+  }
+  .btn-google {
+    background-color: #5C3EE8;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .btn-google:hover {
+    background-color: #4A2ECC;
+  }
+  .btn-google img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .btn-email {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: #E1E1E1;
+  }
+  .btn-email:hover {
+    background-color: #333;
+  }
+  .btn-email img {
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .signup-form {
+    margin-top: 20px;
+    display: none; /* hidden initially */
+    flex-direction: column;
+  }
+  .signup-form input[type="email"],
+  .signup-form input[type="password"],
+  .signup-form input[type="text"] {
+    background-color: #2A2A2A;
+    border: 1px solid #444;
+    border-radius: 10px;
+    color: #E1E1E1;
+    padding: 16px 14px;
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .signup-form input:focus {
+    outline: none;
+    border-color: #5C3EE8;
+  }
+.signin-btn {
+    background-color: #5C3EE8; /* darker purple for better contrast */
+    color: #FFF;
+    width: 100%;
+    padding: 16px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+.signin-btn:hover {
+    background-color: #674AEC;
+  }
+  .terms {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-top: 28px;
+    line-height: 1.4;
+  }
+  .terms a {
+    color: #5C3EE8;
+    text-decoration: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* error message styling */
+  .error-message {
+    color: #FF4C4C;
+    font-size: 14px;
+    margin-bottom: 14px;
+    display: none;
+  }
+  /* Fix Chrome autofill background turning white/yellow */
+.signup-form input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #2A2A2A inset !important;
+    -webkit-text-fill-color: #E1E1E1 !important;
+    caret-color: #E1E1E1;
+    transition: background-color 9999s ease-in-out 0s; /* Prevent flash */
+  }
+  
+  /* Also fix focus highlight */
+  .signup-form input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #2A2A2A inset !important;
+    border-color: #5C3EE8; /* match your focus color */
+  }
+  

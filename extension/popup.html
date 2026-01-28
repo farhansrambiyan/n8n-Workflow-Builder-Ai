@@ -3,26 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>n8n Workflow Builder Ai (Beta)</title>
+    <title>n8n Copilot</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="/style/popup.css">
+    <script src="/script/tally.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Login Screen (shown when not authenticated) -->
+        <div id="login-screen" class="login-screen">
+            <div class="login-container">
+                <img src="assets/icon128.png" alt="n8n Workflow Builder Ai Logo" class="login-logo">
+                <h1>n8n Copilot</h1>
+                <p class="login-subtitle">Sign in to access AI-powered workflow generation</p>
+                <button id="signInBtn" class="sign-in-button">
+                    Sign in to  continue
+                </button>
+                <p class="login-terms">By signing in, you agree to our Terms and Conditions and<a href="https://n8ncopilot.com/privacy-policy/" target="_blank"> Privacy Policy.</a></p>
+            </div>
+        </div>
 
-        <div class="header-container">
-            <img src="icons/logo.svg" alt="n8n Workflow Builder Ai Logo" id="logo">
+        <!-- Onboarding/Tutorial (shown once after authentication) -->
+        <div id="onboarding" class="onboarding" style="display:none;">
+            <div class="onboarding-inner">
+                <img src="assets/icon128.png" alt="n8n Workflow Builder Ai Logo" class="onboarding-logo">
+                <h1 class="onboarding-title">Get set up in minutes</h1>
+                <p class="onboarding-sub">Follow these quick steps to start generating n8n JSON.</p>
+
+                <div class="slides-container">
+                    <div class="slide active" data-index="0">
+                        <div class="slide-image">
+                            <img src="assets/onboarding/domain_auth.png" alt="Settings - Domain" />
+                        </div>
+                        <h2>Step 1</h2>
+                        <p>Add your n8n domain in Settings and click Request Access Permission.</p>
+                    </div>
+                    <div class="slide" data-index="1">
+                        <div class="slide-image">
+                            <img src="assets/onboarding/api_integration.png" alt="API & Models" />
+                        </div>
+                        <h2>Step 2</h2>
+                        <p>In API & Integrations, enable your AI provider and add its API key.</p>
+                    </div>
+                    <div class="slide" data-index="2">
+                        <div class="slide-image">
+                            <img src="assets/onboarding/button_manage.png" alt="Buttons" />
+                        </div>
+                        <h2>Step 3</h2>
+                        <p>Ensure the Generate button is enabled.</p>
+                    </div>
+                    <div class="slide" data-index="3">
+                        <div class="slide-image">
+                            <img src="assets/onboarding/generation_sample.png" alt="Generate" />
+                        </div>
+                        <h2>Step 4</h2>
+                        <p>On your n8n workflow page, click Generate, enter your query, select  the  ai  provide  and  hit Generate. Happy Generation!</p>
+                    </div>
+                </div>
+
+                <div class="slides-controls">
+                    <button id="onboardingPrev" class="secondary" aria-label="Previous">Back</button>
+                    <div class="dots" id="onboardingDots"></div>
+                    <button id="onboardingNext">Next</button>
+                </div>
+
+                <button id="onboardingGetStarted" class="get-started" style="display:none;">Get Started</button>
+                
+            </div>
+        </div>
+
+        <!-- Main Extension Content (shown when authenticated) -->  
+        <div id="main-content" class="main-content" style="display: none;">
+        <div class="header-container" >
+            <img src="assets/icon128.png" alt="n8n Workflow Builder Ai Logo" id="logo" height="45px" width="45 px">
             <div class="tabs">
-                <button class="tab-button active" data-tab="generate">Generate</button>
-                <button class="tab-button" data-tab="history">History</button>
-                <button class="tab-button" data-tab="settings">Settings</button>
+                </button>
+                <button class="tab-button active" data-tab="settings" title="Settings">
+                <span>Settings</span>
+                </button>
+                <button class="tab-button" data-tab="feedback" title="Feedback">
+                <span>Feedback</span>
+                </button>
+                <button class="tab-button " data-tab="profile" title="Profile">
+                <span>Profile</span>
+                </button>
             </div>
         </div>
         <hr class="separator">
 
-        <div id="generate" class="tab-content active">
+        <div id="generate" class="tab-content">
             <div class="form-group">
                 <label for="aiProvider">Enabled Ai Provider:</label>
                 <select id="aiProvider">
@@ -57,34 +128,56 @@
             <p id="status" class="status-message"></p>
         </div>
 
-        <!-- History Tab Content -->
-        <div id="history" class="tab-content">
-            <h2>Generation History</h2>
-            <p class="info">Your previous workflow and node generations are stored locally.</p>
+
+        <!-- Feedback Tab Content -->
+        <div id="feedback" class="tab-content">
+            <h2>Feedback</h2>
+            <iframe data-tally-src="https://tally.so/embed/w55lvM?alignLeft=1&hideTitle=1&dynamicHeight=1" width="100%" height="517" frameborder="0" marginheight="0" marginwidth="0" title="Feedback"></iframe>
+        </div>
+
+        <!-- Profile Tab Content -->
+        <div id="profile" class="tab-content">
+            <h2>Profile</h2>
             
-            <!-- No history message (shown when empty) -->
-            <p id="no-history-message" class="centered-message">No generation history yet. Generate some JSON to see it here.</p>
-            
-            <!-- History items container -->
-            <div id="history-items-container">
-                <!-- History items will be populated by JavaScript -->
+            <div class="profile-info-container">
+                <div class="profile-avatar-section">
+                    <img id="profileAvatar" src="assets/user.png" alt="Profile Picture" class="profile-avatar">
+                    <div class="profile-details">
+                        <h3 id="profileName" class="profile-name">Loading...</h3>
+                        <p id="profileEmail" class="profile-email">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="profile-actions">
+                    <button id="profileLogoutBtn" class="profile-logout-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <polyline points="16,17 21,12 16,7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="21" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Sign Out
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div id="settings" class="tab-content">
-            <!-- Display Mode Setting (Moved to top) -->
+        <div id="settings" class="tab-content active">
+            <h2>Settings</h2>
+            
             <div class="settings-section">
-                <h2>Display Settings</h2>
                 <div class="form-group">
-                    <label for="displayMode">Display Mode:</label>
-                    <select id="displayMode" class="auto-save">
-                        <option value="popup">Popup Window</option>
-                        <option value="sidepanel">Side Panel</option>
-                    </select>
-                    <small>Choose how you want the extension to open. Changes take effect after restarting the extension.</small>
+                    <label for="n8nDomain">Your n8n Domain URL:</label>
+                    <input type="text" id="n8nDomain" class="auto-save-blur" placeholder="https://your-n8n-instance.com" />   
+                    <div style="margin-top: 8px;">
+                    <button id="requestPermissionBtn" class="request-permission-button">
+                        Request Access Permission
+                    </button>
+                    </div>
+                    
+                    <p id="domain-permission-status" class="status-message"></p>
                 </div>
             </div>
-
+            
             <h2>API Keys & Models Configuration</h2>
             <p class="info">Enable providers you want to use. API keys are stored locally.</p>
             
@@ -116,7 +209,7 @@
             <!-- Google Gemini -->
             <div class="settings-provider-container" data-provider-id="gemini">
                 <div class="provider-header">
-                    <span class="provider-label">Google Gemini</span>
+                    <span class="provider-label">Google Gemini <span class="recommended-badge">Recommended</span></span>
                     <label class="switch">
                         <input type="checkbox" class="provider-toggle auto-save" data-provider-id="gemini">
                         <span class="slider"></span>
@@ -238,30 +331,24 @@
                 </div>
             </div>
 
-            <!-- Real Groq -->
-            <div class="settings-provider-container" data-provider-id="realgroq">
+            <h2>Display Buttons</h2>
+            <p class="info">Control which buttons are injected into n8n websites.</p>
+            
+            <!-- Generate Button -->
+            <div class="settings-provider-container" data-provider-id="generate">
                 <div class="provider-header">
-                    <span class="provider-label">Groq</span>
+                    <span class="provider-label">
+                        Generate Button
+                        <span class="info-icon" data-tooltip="Enable the Generate button on n8n websites. Generate new workflows and nodes using AI.">ⓘ</span>
+                    </span>
                     <label class="switch">
-                        <input type="checkbox" class="provider-toggle auto-save" data-provider-id="realgroq">
+                        <input type="checkbox" id="generateButtonEnabled" class="auto-save">
                         <span class="slider"></span>
                     </label>
                 </div>
-                <div class="provider-details">
-                    <div class="form-group">
-                        <label for="realGroqApiKey">API Key:</label>
-                        <input type="password" id="realGroqApiKey" class="auto-save-blur" placeholder="Enter your Groq API key">
-                    </div>
-                    <div class="form-group">
-                        <label for="realGroqModelSelect">Model:</label>
-                        <select id="realGroqModelSelect" class="auto-save" disabled>
-                            <option value="" disabled selected>Enable & Enter API Key...</option>
-                        </select>
-                        <small></small>
-                        <small class="hint-text">Note: Not all models will generate valid JSON. Try other models if generation fails.</small>
-                    </div>
-                </div>
             </div>
+
+
 
             <!-- REMOVED Save Settings Button -->
             <p id="settings-status" class="status-message" style="margin-top: 20px;"></p> <!-- Keep for feedback -->
@@ -271,11 +358,12 @@
         <div class="footer">
             <p class="help-link">
                 Need help? Visit our <a href="https://far.hn/n8n-workflow-builder-ai" target="_blank">FAQs & Guide</a> <br>
-                <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> | <a href="https://github.com/farhansrambiyan/n8n-Workflow-Builder-Ai" target="_blank">Open source</a> | <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
+                <a href="https://far.hn/feature-request" target="_blank">Report Bug or Request a feature</a> |  <a href="https://www.buymeacoffee.com/farhansrambiyan" target="_blank">Consider Donating via BMC</a>
             </p>
         </div>
+        </div> <!-- End of main-content -->
 
     </div>
-    <script src="popup.js"></script>
+    <script src="script/popup.js"></script>
 </body>
 </html>

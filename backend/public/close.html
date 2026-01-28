@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logged In</title>
+  <link rel="icon" href="icon128.png" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background-color: #121212;
+      color: #E1E1E1;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background-color: #1F1F1F;
+      width: 460px;
+      max-width: 100%;
+      padding: 40px 32px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .7);
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding-left: 0.5rem;
+    }
+
+    .icon svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #BDBDBD;
+      margin: 6px 0 0;
+      line-height: 1.5;
+    }
+
+    .hint {
+      margin-top: 14px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="m16 11 2 2 4-4" />
+      </svg>
+    </div>
+    <h1>Successfully logged in</h1>
+    <p>You may close this tab and return to your extension.</p>
+  </main>
+<script>
+  console.log('close.html script starting...');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('close.html DOMContentLoaded event fired');
+    console.log('close.html loaded, checking for auth data...');
+
+    try {
+      // Get user data from sessionStorage
+      const userData = sessionStorage.getItem('n8n_user_auth');
+      console.log('Retrieved user data from sessionStorage:', userData);
+
+
+      if (userData) {
+        console.log('Found user data in sessionStorage!');
+        const userInfo = JSON.parse(userData);
+        console.log('Parsed user data:', userInfo.accessToken);
+
+        // Wait a bit for content script to load, then send message ONCE
+        setTimeout(() => {
+          console.log('Sending message to extension...');
+          window.postMessage({
+            type: 'N8N_AUTH_SUCCESS',
+            userData: userInfo,
+            source: 'firebase-auth'
+          }, 'ENTER YOUR EXTENSION ORIGIN HERE/DOMAIN HERE'); // e.g., 'chrome-extension://your-extension-id'
+
+          console.log('Message sent to extension');
+        }, 1000);
+
+        // Clean up sessionStorage
+        setTimeout(() => {
+          sessionStorage.removeItem('n8n_user_auth');
+        },5000)
+        
+        console.log('SessionStorage cleaned up');
+
+        // Auto-close tab after delay
+        setTimeout(() => {
+          console.log('Auto-closing tab...');
+          window.close();
+        }, 1000);
+      } else {
+        console.log('No authentication data found in sessionStorage');
+      }
+    } catch (error) {
+      console.error('Error in close.html:', error);
+    }
+  });
+
+  console.log('close.html script loaded');
+</script>
+</body>
+
+</html>

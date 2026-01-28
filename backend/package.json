@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development",
+    "serve": "webpack serve --mode=development",
+    "watch": "webpack --mode=development --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "firebase": "^12.3.0",
+    "firebase-admin": "^12.7.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.10.1",
+    "nodemon": "^3.1.10",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.13.5",
+    "@swc/helpers": "^0.5.17",
+    "buffer": "^6.0.3",
+    "parcel": "^2.16.0",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  }
+}
