@@ -6,11 +6,10 @@ An open-source Chrome Extension designed to help n8n users quickly generate JSON
 
 **Note:** This project is intended for **personal, non-commercial use**. Please respect the terms of service of the AI providers (OpenAI, Gemini, Mistral, Claude, OpenRouter, Groq and Grok (x.ai)).
 
-Need help? Visit our FAQs & Guide: https://far.hn/n8n-workflow-builder-ai
+Need help? Visit our FAQs & Guide: https://n8ncopilot.com
 
-Report Bug or Request a feature: https://far.hn/feature-request
+Report Bug or Request a feature: https://n8ncopilot.com/feature-request
 
-Consider Donating via BMC: https://www.buymeacoffee.com/farhansrambiyan
 
 ## Features
 
