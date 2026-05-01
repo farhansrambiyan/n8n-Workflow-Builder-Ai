@@ -139,4 +139,14 @@ Changelog:
 * Provider Enable/Disable Toggles:
     * In Settings, each AI provider can now be individually enabled or disabled using a toggle switch.
     * Provider-specific settings (API key, model) are only shown if the provider is enabled.
+ 
+## Star History
+
+<a href="https://www.star-history.com/?repos=farhansrambiyan%2Fn8n-Workflow-Builder-Ai&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=farhansrambiyan/n8n-Workflow-Builder-Ai&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=farhansrambiyan/n8n-Workflow-Builder-Ai&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=farhansrambiyan/n8n-Workflow-Builder-Ai&type=date&legend=top-left" />
+ </picture>
+</a>
 
